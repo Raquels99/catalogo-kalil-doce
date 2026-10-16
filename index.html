@@ -4,251 +4,191 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Catálogo Oficial - Kalil & Doce Tentação</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:wght@500;600;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     :root{
       --page-bg:#ffffff;
       --surface:#fafafa;
       --muted:#6b6b6b;
-      --accent-1:#2e7d32; /* verde Kalil */
-      --accent-2:#e0a96b; /* dourado */
-      --accent-3:#e91e63; /* rosa Doce */
+      --kalil-primary:#2e7d32;
+      --doce-accent:#c2185b;
+      --gold:#e0a96b;
       --card:#ffffff;
-      --radius:14px;
+      --radius:12px;
       --text:#111;
-      --success:#4caf50;
-      --danger:#d32f2f;
       --transition:180ms;
     }
     *{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
     html,body{height:100%}
-    body{
-      background:var(--page-bg);
-      color:var(--text);
-      padding:28px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:15px;
-    }
-
-    .container{width:100%;max-width:1200px}
+    body{background:var(--page-bg);color:var(--text);padding:28px;display:flex;align-items:center;justify-content:center;font-size:15px}
+    .container{width:100%;max-width:1100px;position:relative}
 
     /* Top */
-    .topo{
-      display:flex;justify-content:space-between;align-items:center;
-      background:linear-gradient(90deg,#fff 0,#f7f7f7 100%);padding:14px;border-radius:12px;border:1px solid #eee;
-      box-shadow:0 6px 18px rgba(20,20,20,0.04);margin-bottom:18px;
-    }
+    .topo{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#fff 0,#f7f7f7 100%);padding:14px;border-radius:12px;border:1px solid #eee;box-shadow:0 6px 18px rgba(20,20,20,0.04);margin-bottom:18px}
     .brand{font-size:22px;font-weight:800;color:#333}
-    .brand small{display:block;font-size:12px;color:var(--muted);font-weight:600}
     .top-actions{display:flex;gap:10px;align-items:center}
-    .btn{
-      background:#fff;color:#333;border:1px solid #e6e6e6;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;
-      transition:all var(--transition);
-    }
-    .btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,0.06)}
-    .btn.admin{background:var(--accent-3);color:#fff;border:none}
-    .btn.view{background:var(--accent-1);color:#fff;border:none}
+    .btn{background:#fff;color:#333;border:1px solid #e6e6e6;padding:8px 12px;border-radius:8px;cursor:pointer;font-weight:600;transition:all var(--transition)}
+    .btn.admin{background:var(--doce-accent);color:#fff;border:none}
+    .btn.view{background:var(--kalil-primary);color:#fff;border:none}
 
     /* selection */
     .selection{background:var(--surface);padding:28px;border-radius:var(--radius);border:1px solid #eee;text-align:center}
-    .selection h2{color:#222;margin-bottom:8px;font-size:22px}
     .cards{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin-top:18px}
     .shop-card{width:320px;background:linear-gradient(180deg,#fff 0,#fcfcfc 100%);border-radius:12px;padding:18px;border:1px solid #eee;cursor:pointer;transition:all var(--transition);display:flex;flex-direction:column;align-items:flex-start}
-    .shop-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(20,20,20,0.06)}
-    .shop-card h3{color:#222;margin-bottom:8px}
-    .shop-card p{color:var(--muted);font-size:13px;margin-bottom:12px}
 
     /* encartes */
-    .encarte{background:#fff;border-radius:var(--radius);padding:0;margin-top:18px;border:1px solid #eee}
+    .encarte{background:#fff;border-radius:var(--radius);padding:0;margin-top:18px;border:1px solid #eee;position:relative;overflow:visible}
+
+    /* decorative side images (absolute inside .encarte) */
+    .side-img{position:absolute;top:10%;width:220px;height:320px;background-size:cover;background-position:center;opacity:0.95;pointer-events:none;transform-origin:center;filter:drop-shadow(0 20px 40px rgba(0,0,0,0.25));z-index:1}
+    .side-img.left{left:-80px}
+    .side-img.right{right:-80px}
+    .side-img.hidden{display:none}
 
     /* Kalil header */
-    .enc-header.kalil{
-      background:linear-gradient(180deg, rgba(46,125,50,0.08), rgba(2,136,209,0.02)), url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
-      padding:20px;color:#083d2d;border-top-left-radius:14px;border-top-right-radius:14px
-    }
+    .enc-header.kalil{background:linear-gradient(180deg, rgba(46,125,50,0.08), rgba(2,136,209,0.02)), url('https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;padding:20px;color:#083d2d;border-top-left-radius:14px;border-top-right-radius:14px;position:relative;z-index:2}
     .enc-header.kalil .enc-title{color:#083d2d}
 
-    /* DOCE TENTAÇÃO - hero escuro e luxuoso */
-    .doce-hero{
-      position:relative;overflow:hidden;border-top-left-radius:14px;border-top-right-radius:14px;height:420px;color:#fff;margin-bottom:36px;
-      background:linear-gradient(90deg, rgba(10,10,10,0.6), rgba(30,10,15,0.6));
-      display:flex;align-items:center;justify-content:flex-end;padding:40px 36px;
-      background-image: url('https://images.unsplash.com/photo-1520975698519-1c5a4b0b0f8b?auto=format&fit=crop&w=2000&q=80');
-      background-size:cover;background-position:center;
-    }
+    /* DOCE hero */
+    .doce-hero{position:relative;overflow:hidden;border-top-left-radius:14px;border-top-right-radius:14px;height:420px;color:#fff;margin-bottom:36px;background-size:cover;background-position:center;display:flex;align-items:center;justify-content:flex-end;padding:40px 36px;z-index:2}
     .doce-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg, rgba(5,5,5,0.55) 0%, rgba(5,5,5,0.15) 60%);}
-    .doce-hero .hero-content{position:relative;max-width:640px;margin-right:40px}
-    .hero-title{font-family:'Playfair Display', serif;font-size:40px;color:var(--accent-2);line-height:1.02;margin-bottom:12px}
+    .doce-hero .hero-content{position:relative;max-width:640px;margin-right:40px;z-index:3}
+    .hero-title{font-family:'Playfair Display',serif;font-size:40px;color:var(--gold);line-height:1.02;margin-bottom:12px}
     .hero-sub{color:#f0d9b3;margin-bottom:18px;font-size:16px}
-    .hero-cta{background:var(--accent-2);color:#111;padding:10px 18px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+    .hero-cta{background:var(--gold);color:#111;padding:10px 18px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
 
-    /* Cards overlay below hero */
-    .doce-cards{position:relative;max-width:1200px;margin:-70px auto 0;display:flex;gap:18px;justify-content:center;padding:0 20px}
-    .doce-card{background:#fff;color:#111;border-radius:14px;padding:18px;width:320px;box-shadow:0 18px 40px rgba(10,10,10,0.12);overflow:hidden;border:1px solid rgba(0,0,0,0.06)}
-    .doce-card img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:12px}
-    .doce-card h4{font-size:16px;margin-bottom:6px}
-    .doce-card p{color:var(--muted);font-size:13px}
+    .doce-cards{position:relative;max-width:1200px;margin:-70px auto 0;display:flex;gap:18px;justify-content:center;padding:0 20px;z-index:3}
+    .doce-card{background:#fff;color:#111;border-radius:14px;padding:18px;width:320px;box-shadow:0 18px 40px rgba(10,10,10,0.12);overflow:hidden;border:1px solid rgba(0,0,0,0.06);position:relative}
 
     /* product grid */
     .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px;padding:18px}
-    .card{background:#fff;color:#111;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 18px rgba(20,20,20,0.04);border:1px solid #f0f0f0}
+    .card{background:#fff;color:#111;border-radius:10px;padding:12px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 6px 18px rgba(20,20,20,0.04);border:1px solid #f0f0f0;position:relative;z-index:2}
     .card img{width:100%;height:140px;object-fit:cover;border-radius:8px;margin-bottom:8px;background:#fafafa}
     .card h4{font-size:14px;margin-bottom:6px;color:#222}
     .price{font-weight:800;color:#c2185b;margin-bottom:8px}
-    .card .actions{display:flex;gap:8px}
     .btn-add{flex:1;background:linear-gradient(90deg,#ff7aa2,#c2185b);color:#fff;border-radius:8px;padding:8px;border:none;cursor:pointer}
 
-    /* kalil variants */
-    .kalil-card .price{color:#0b8043}
-
-    /* floating cart */
-    .cart-float{position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,#25d366,#128c7e);color:#fff;padding:12px 16px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,0.12);cursor:pointer;display:flex;gap:10px;align-items:center;z-index:999}
-    .hidden{display:none !important}
-
-    /* modal */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.32);z-index:1000}
-    .modal .box{width:100%;max-width:520px;background:#fff;padding:18px;border-radius:12px;border:1px solid #eee;color:var(--text);box-shadow:0 18px 40px rgba(20,20,20,0.06)}
-    .cart-item{display:flex;justify-content:space-between;align-items:center;padding:8px 6px;border-radius:8px;background:#fafafa;margin-bottom:8px}
-    .cart-item small{color:var(--muted)}
-
-    /* admin */
+    /* admin panel */
     .nav-admin{display:flex;gap:8px;margin-top:12px}
-    .panel{background:#fff;padding:16px;border-radius:12px;border:1px solid #eee;margin-top:12px;box-shadow:0 8px 24px rgba(20,20,20,0.03)}
-    .input, input[type="text"], input[type="number"], select{background:#fff;border:1px solid #eee;color:var(--text);padding:8px;border-radius:8px;width:100%}
-
-    /* table */
-    table{width:100%;border-collapse:collapse;margin-top:12px}
-    th,td{padding:8px;text-align:left;border-bottom:1px solid #f3f3f3;font-size:13px;color:var(--text)}
+    .panel{background:#fff;padding:16px;border-radius:12px;border:1px solid #eee;margin-top:12px}
+    .form-row{display:flex;gap:8px;align-items:center;margin-bottom:10px}
+    .form-row input[type="text"], .form-row input[type="color"], select{padding:8px;border-radius:8px;border:1px solid #eee}
+    .small{font-size:13px;color:var(--muted)}
 
     /* responsive */
     @media (max-width:900px){
-      .shop-card{width:100%}
-      .topo{flex-direction:column;gap:10px;align-items:flex-start}
-      .enc-header{flex-direction:column;align-items:flex-start;gap:6px}
       .doce-hero{height:360px;padding:24px}
       .doce-cards{flex-direction:column;margin-top:-40px}
       .doce-card{width:100%}
+      .side-img{display:none}
     }
   </style>
 </head>
 <body>
   <div class="container">
     <header class="topo" role="banner">
-      <div>
-        <div class="brand">Kalil & Doce Tentação <small>Catálogo Oficial</small></div>
-      </div>
+      <div class="brand">Kalil & Doce Tentação</div>
       <div class="top-actions">
         <button class="btn admin" onclick="abrirTelaLogin()">🔒 Área Admin</button>
-        <button class="btn view" id="ver-catalogo" onclick="mostrarTelaSelecao()">👁️ Ver Catálogo</button>
+        <button class="btn view" onclick="mostrarTelaSelecao()">👁️ Ver Catálogo</button>
       </div>
     </header>
 
-    <!-- Seleção -->
-    <section id="tela-selecao-loja" class="selection" aria-labelledby="sel-title">
-      <h2 id="sel-title">Selecione o Catálogo Desejado</h2>
-      <p class="slogan">Escolha qual loja você deseja visualizar agora</p>
-      <div class="cards" style="margin-top:18px">
-        <div class="shop-card" onclick="escolherLoja('kalil')" role="button" tabindex="0" aria-label="Abrir catálogo Kalil">
-          <h3>🧼 Kalil Limpeza</h3>
-          <p>Produtos de qualidade para sua casa.</p>
-          <button class="btn view" style="margin-top:auto">Ver Catálogo Kalil</button>
+    <!-- public catalog -->
+    <div id="catalogo-publico">
+      <section id="tela-selecao-loja" class="selection">
+        <h2>Selecione o Catálogo Desejado</h2>
+        <div class="cards">
+          <div class="shop-card" onclick="escolherLoja('kalil')">
+            <h3>🧼 Kalil Limpeza</h3>
+            <p class="small">Produtos de qualidade para sua casa.</p>
+            <button class="btn view" style="margin-top:12px">Ver Catálogo Kalil</button>
+          </div>
+          <div class="shop-card" onclick="escolherLoja('doce')">
+            <h3>🔥 Doce Tentação</h3>
+            <p class="small">Moda íntima e Sexy Shop com discrição.</p>
+            <button class="btn" style="margin-top:12px;background:var(--doce-accent);color:#fff;border:none">Ver Catálogo Doce</button>
+          </div>
         </div>
-        <div class="shop-card" onclick="escolherLoja('doce')" role="button" tabindex="0" aria-label="Abrir catálogo Doce Tentação">
-          <h3>🔥 Doce Tentação</h3>
-          <p>Moda íntima e Sexy Shop com discrição.</p>
-          <button class="btn" style="margin-top:auto;background:linear-gradient(90deg,var(--accent-3),#ff80ab);color:#fff;border:none">Ver Catálogo Doce</button>
+      </section>
+
+      <!-- Kalil section -->
+      <section id="secao-kalil" class="encarte" style="display:none">
+        <div class="side-img left hidden" id="kalil-side-left"></div>
+        <div class="side-img right hidden" id="kalil-side-right"></div>
+        <div class="enc-header kalil">
+          <div>
+            <div class="enc-title">Kalil</div>
+            <div class="slogan">Qualidade, perfume e limpeza para o seu dia a dia</div>
+          </div>
+          <div><button class="btn" onclick="mostrarTelaSelecao()">⬅️ Voltar</button></div>
         </div>
-      </div>
-    </section>
+        <div id="grid-produtos-kalil" class="grid"></div>
+        <div style="padding:14px;color:var(--muted);border-top:1px solid #f3f3f3;position:relative;z-index:2">📍 Rua Major João Cordeiro, nº 23 - Centro - Tabira-PE • 💬 Pedidos: (87) 99807-1409</div>
+      </section>
 
-    <!-- Kalil -->
-    <section id="secao-kalil" class="encarte hidden" aria-hidden="true">
-      <div class="enc-header kalil">
-        <div>
-          <div class="enc-title">Kalil</div>
-          <div class="slogan">Qualidade, perfume e limpeza para o seu dia a dia</div>
+      <!-- Doce section -->
+      <section id="secao-doce" class="encarte" style="display:none">
+        <div class="side-img left hidden" id="doce-side-left"></div>
+        <div class="side-img right hidden" id="doce-side-right"></div>
+        <div id="doce-hero" class="doce-hero" style="background-image: url('https://images.unsplash.com/photo-1520975698519-1c5a4b0b0f8b?auto=format&fit=crop&w=1600&q=80')">
+          <div class="hero-content">
+            <div class="eyebrow small">Doce Tentação</div>
+            <h1 class="hero-title">Liberte Seus Desejos com Elegância.</h1>
+            <p class="hero-sub">Uma curadoria exclusiva de moda íntima e acessórios premium para elevar a sua sensualidade e intimidade.</p>
+            <button class="hero-cta" onclick="scrollToCollections()">EXPLORAR COLEÇÃO</button>
+          </div>
         </div>
-        <div><button class="btn" onclick="mostrarTelaSelecao()">⬅️ Voltar</button></div>
-      </div>
-      <div id="grid-produtos-kalil" class="grid"></div>
-      <div style="padding:14px;color:var(--muted);border-top:1px solid #f3f3f3">📍 Rua Major João Cordeiro, nº 23 - Centro - Tabira-PE • 💬 Pedidos: (87) 99807-1409</div>
-    </section>
-
-    <!-- Doce - hero + cards + produto grids -->
-    <section id="secao-doce" class="encarte hidden" aria-hidden="true">
-      <div class="doce-hero" role="img" aria-label="Banner Doce Tentação">
-        <div class="hero-content">
-          <div class="hero-eyebrow" style="color:#f3d9b3;font-weight:700;margin-bottom:8px">Doce Tentação</div>
-          <h1 class="hero-title">Liberte Seus Desejos com Elegância.</h1>
-          <p class="hero-sub">Uma curadoria exclusiva de moda íntima e acessórios premium para elevar sua sensualidade e intimidade.</p>
-          <button class="hero-cta" onclick="scrollToCollections()">EXPLORAR COLEÇÃO</button>
+        <div class="doce-cards">
+          <div class="doce-card"><img src="https://images.unsplash.com/photo-1520975698519-1c5a4b0b0f8b?auto=format&fit=crop&w=900&q=80" alt="Lingerie"><div style="padding:12px"><strong>Lingerie Sensual</strong><div class="small">Peças premium com renda</div></div></div>
+          <div class="doce-card"><img src="https://images.unsplash.com/photo-1505691723518-36a3aa578c3b?auto=format&fit=crop&w=900&q=80" alt="Bem-estar"><div style="padding:12px"><strong>Bem-Estar Íntimo</strong><div class="small">Aromas, óleos e cuidados</div></div></div>
+          <div class="doce-card"><img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80" alt="Cosméticos"><div style="padding:12px"><strong>Cosméticos e Sedução</strong><div class="small">Fragrâncias e cosméticos</div></div></div>
         </div>
-      </div>
 
-      <div class="doce-cards">
-        <div class="doce-card">
-          <img src="https://images.unsplash.com/photo-1520975698519-1c5a4b0b0f8b?auto=format&fit=crop&w=900&q=80" alt="Lingerie Sensual">
-          <h4>Lingerie Sensual</h4>
-          <p>Peças premium com renda e caimento impecável.</p>
+        <div id="collections" style="padding:18px">
+          <div style="font-weight:700;color:#4a1030;margin-bottom:12px">👙 Moda Íntima</div>
+          <div id="grid-produtos-moda" class="grid"></div>
+
+          <div style="font-weight:700;color:#4a1030;margin:18px 0 12px 0">🔥 Sexy Shop</div>
+          <div id="grid-produtos-sexy" class="grid"></div>
         </div>
-        <div class="doce-card">
-          <img src="https://images.unsplash.com/photo-1505691723518-36a3aa578c3b?auto=format&fit=crop&w=900&q=80" alt="Bem-estar íntimo">
-          <h4>Bem-Estar Íntimo</h4>
-          <p>Aromas, óleos e cuidados para momentos especiais.</p>
-        </div>
-        <div class="doce-card">
-          <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80" alt="Cosméticos e Sedução">
-          <h4>Cosméticos e Sedução</h4>
-          <p>Fragrâncias e cosméticos que aumentam a confiança.</p>
-        </div>
-      </div>
 
-      <div id="collections" style="padding:18px">
-        <div style="font-weight:700;color:#4a1030;margin-bottom:12px">👙 Moda Íntima</div>
-        <div id="grid-produtos-moda" class="grid"></div>
-
-        <div style="font-weight:700;color:#4a1030;margin:18px 0 12px 0">🔥 Sexy Shop</div>
-        <div id="grid-produtos-sexy" class="grid"></div>
-      </div>
-
-      <div style="padding:14px;color:var(--muted);border-top:1px solid #f3f3f3">📍 Rua Major João Cordeiro, nº 23 - Centro - Tabira-PE • 💬 Pedidos: (87) 99807-1409</div>
-    </section>
-
-    <!-- floating cart -->
-    <div id="flutuante-carrinho" class="cart-float hidden" onclick="abrirCarrinho()" role="button" aria-label="Abrir carrinho">
-      🛒 <span id="contador-carrinho">0</span> • Ver Carrinho
+        <div style="padding:14px;color:var(--muted);border-top:1px solid #f3f3f3;position:relative;z-index:2">📍 Rua Major João Cordeiro, nº 23 - Centro - Tabira-PE • 💬 Pedidos: (87) 99807-1409</div>
+      </section>
     </div>
 
+    <!-- floating cart -->
+    <div id="flutuante-carrinho" class="hidden" onclick="abrirCarrinho()" role="button" aria-label="Abrir carrinho" style="position:fixed;right:18px;bottom:18px;background:linear-gradient(90deg,#25d366,#128c7e);color:#fff;padding:12px 16px;border-radius:999px;box-shadow:0 8px 30px rgba(0,0,0,0.12);display:flex;gap:10px;align-items:center;z-index:999">🛒 <span id="contador-carrinho">0</span> • Ver Carrinho</div>
+
     <!-- modal carrinho -->
-    <div id="modal-carrinho" class="modal hidden" aria-hidden="true">
-      <div class="box" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-        <h3 id="cart-title">🛍️ Seu Carrinho</h3>
+    <div id="modal-carrinho" class="hidden" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.32);z-index:1000">
+      <div style="width:100%;max-width:520px;background:#fff;padding:18px;border-radius:12px;border:1px solid #eee;color:var(--text);box-shadow:0 18px 40px rgba(20,20,20,0.06)">
+        <h3>🛍️ Seu Carrinho</h3>
         <div id="lista-itens-carrinho"></div>
         <div style="display:flex;justify-content:space-between;margin-top:10px"><strong>Total:</strong><strong id="carrinho-total-geral">R$ 0,00</strong></div>
         <div style="margin-top:10px">
           <label style="font-size:12px;color:var(--muted)">Seu nome</label>
-          <input id="cliente-pedido-nome" class="input" placeholder="Nome completo">
+          <input id="cliente-pedido-nome" style="width:100%;padding:8px;border-radius:6px;border:1px solid #eee;margin-top:6px" placeholder="Nome completo">
         </div>
         <div style="display:flex;gap:8px;margin-top:10px">
-          <button class="btn view" style="flex:1;background:linear-gradient(90deg,#25d366,#128c7e)" onclick="finalizarPedidoWhatsApp()">💬 Enviar no WhatsApp</button>
+          <button class="btn view" style="flex:1;background:linear-gradient(90deg,#25d366,#128c7e);color:#fff;border:none" onclick="finalizarPedidoWhatsApp()">💬 Enviar no WhatsApp</button>
           <button class="btn" onclick="fecharCarrinho()">Fechar</button>
         </div>
       </div>
     </div>
 
-    <!-- admin minimal (visível após login) -->
-    <div id="nav-tabs-admin" class="nav-admin hidden" aria-hidden="true">
-      <button class="btn" onclick="mudarAba('sec-controle')">📦 Estoque</button>
-      <button class="btn" onclick="voltarParaCliente()">👁️ Ver Catalogo</button>
+    <!-- admin area -->
+    <div id="nav-tabs-admin" style="display:none;margin-top:14px">
+      <div style="display:flex;gap:8px">
+        <button class="btn" onclick="mudarAba('sec-controle')">📦 Estoque</button>
+        <button class="btn" onclick="mudarAba('sec-config')">⚙️ Configurações dos Catálogos</button>
+        <button class="btn" onclick="voltarParaCliente()">👁️ Ver Catálogo</button>
+      </div>
     </div>
 
-    <div id="sec-controle" class="panel hidden" aria-hidden="true">
-      <h4 style="margin-bottom:8px;color:var(--accent-1)">Cadastrar / Atualizar Produto</h4>
+    <!-- ABA 1: controle estoque/admin -->
+    <div id="sec-controle" style="display:none" class="panel">
+      <h2 style="margin-bottom:12px;color:var(--kalil-primary)">Cadastrar / Atualizar Produto</h2>
       <form id="form-produto" onsubmit="cadastrarProduto(event)" style="display:grid;gap:8px">
         <div style="display:grid;grid-template-columns:1fr 2fr;gap:8px">
           <input id="cad-cod" placeholder="Código (ex: 001)" required>
@@ -268,11 +208,11 @@
           <img id="preview-prod-img" alt="preview" style="width:40px;height:40px;object-fit:cover;border-radius:6px;display:none">
           <button class="btn view" type="submit" style="margin-left:auto">Salvar</button>
         </div>
-      </form>
 
-      <h4 style="margin-top:12px;color:var(--muted)">Produtos no estoque</h4>
-      <input id="busca-estoque-input" placeholder="Pesquisar..." oninput="atualizarTabelaEstoque()" style="margin-top:8px">
-      <table id="tabela-estoque" style="margin-top:8px"></table>
+        <h3 style="margin-top:12px;color:#444">Gerenciar Produtos</h3>
+        <input id="busca-estoque-input" placeholder="Pesquisar..." oninput="atualizarTabelaEstoque()" style="margin-top:8px">
+        <table id="tabela-estoque" style="margin-top:8px;width:100%"></table>
+      </form>
     </div>
   </div>
 
@@ -357,6 +297,8 @@
       if(ex){ ex.nome=nome; ex.preco=preco; ex.qtd=qtd; ex.categoria=categoria; if(imagemTempBase64) ex.imagem=imagemTempBase64; }
       else produtosEstoque.push({cod,nome,preco,qtd,categoria,imagem:imagemTempBase64||''});
       salvarDados(); document.getElementById('form-produto').reset(); document.getElementById('preview-prod-img').style.display='none'; imagemTempBase64='';
+      // IMPORTANT FIX: ensure code input is editable after saving (remove readonly if left from editing mode)
+      document.getElementById('cad-cod').removeAttribute('readonly');
       atualizarTabelaEstoque(); alert('Produto salvo!');
     }
     function editarProduto(cod){
@@ -463,7 +405,7 @@
     }
 
     // util de escape para inserir nome em onclick sem quebrar
-    function escapeHtml(text){ return String(text).replace(/'/g,"\\'").replace(/\"/g,'&quot;'); }
+    function escapeHtml(text){ return String(text).replace(/'/g,"\\'").replace(/"/g,'&quot;'); }
 
     // inicialização
     window.onload = function(){
